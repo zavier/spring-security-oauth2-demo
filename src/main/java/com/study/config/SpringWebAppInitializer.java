@@ -4,7 +4,7 @@ import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatche
 
 public class SpringWebAppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
     protected Class<?>[] getRootConfigClasses() {
-        return new Class[] {SecurityConfig.class};
+        return new Class[] {SecurityConfig.class, OAuth2ServerConfig.class};
     }
 
     protected Class<?>[] getServletConfigClasses() {
