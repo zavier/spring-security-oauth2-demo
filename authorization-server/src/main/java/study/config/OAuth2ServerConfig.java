@@ -25,49 +25,49 @@ import javax.sql.DataSource;
 @Configuration
 public class OAuth2ServerConfig {
 
-	@Configuration
-	@EnableAuthorizationServer
-	protected static class AuthorizationServerConfiguration extends AuthorizationServerConfigurerAdapter {
+    @Configuration
+    @EnableAuthorizationServer
+    protected static class AuthorizationServerConfiguration extends AuthorizationServerConfigurerAdapter {
 
-		@Autowired
-		ClientDetailsService clientDetailsService;
+        @Autowired
+        ClientDetailsService clientDetailsService;
 
-		@Autowired
-		private DataSource dataSource;
+        @Autowired
+        private DataSource dataSource;
 
-		@Override
-		public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-			clients.jdbc(dataSource);
-		}
+        @Override
+        public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
+            clients.jdbc(dataSource);
+        }
 
-		@Override
-		public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
-			endpoints.tokenStore(tokenStore())
-					.userApprovalHandler(userApprovalHandler());
-		}
+        @Override
+        public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
+            endpoints.tokenStore(tokenStore())
+                    .userApprovalHandler(userApprovalHandler());
+        }
 
 
-		@Bean
-		public TokenStore tokenStore() {
-			JdbcTokenStore jdbcTokenStore = new JdbcTokenStore(dataSource);
-			return jdbcTokenStore;
-		}
+        @Bean
+        public TokenStore tokenStore() {
+            JdbcTokenStore jdbcTokenStore = new JdbcTokenStore(dataSource);
+            return jdbcTokenStore;
+        }
 
-		@Bean
-		public ApprovalStore approvalStore() throws Exception {
-			TokenApprovalStore store = new TokenApprovalStore();
-			store.setTokenStore(tokenStore());
-			return store;
-		}
+        @Bean
+        public ApprovalStore approvalStore() throws Exception {
+            TokenApprovalStore store = new TokenApprovalStore();
+            store.setTokenStore(tokenStore());
+            return store;
+        }
 
-		@Bean
-		public TokenStoreUserApprovalHandler userApprovalHandler() throws Exception {
-			TokenStoreUserApprovalHandler handler = new TokenStoreUserApprovalHandler();
-			handler.setTokenStore(tokenStore());
-			handler.setRequestFactory(new DefaultOAuth2RequestFactory(clientDetailsService));
-			handler.setClientDetailsService(clientDetailsService);
-			return handler;
-		}
-	}
+        @Bean
+        public TokenStoreUserApprovalHandler userApprovalHandler() throws Exception {
+            TokenStoreUserApprovalHandler handler = new TokenStoreUserApprovalHandler();
+            handler.setTokenStore(tokenStore());
+            handler.setRequestFactory(new DefaultOAuth2RequestFactory(clientDetailsService));
+            handler.setClientDetailsService(clientDetailsService);
+            return handler;
+        }
+    }
 
 }

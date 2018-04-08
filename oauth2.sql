@@ -10,6 +10,20 @@ CREATE DATABASE /*!32312 IF NOT EXISTS*/`oauth2` /*!40100 DEFAULT CHARACTER SET 
 
 USE `oauth2`;
 
+/*Table structure for table `authorities` */
+
+DROP TABLE IF EXISTS `authorities`;
+
+CREATE TABLE `authorities` (
+  `username` varchar(50) DEFAULT NULL,
+  `authority` varchar(50) DEFAULT NULL,
+  UNIQUE KEY `ix_auth_username` (`username`,`authority`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `authorities` */
+
+insert  into `authorities`(`username`,`authority`) values ('user','USER');
+
 /*Table structure for table `oauth_access_token` */
 
 DROP TABLE IF EXISTS `oauth_access_token`;
@@ -61,6 +75,20 @@ CREATE TABLE `oauth_refresh_token` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `oauth_refresh_token` */
+
+/*Table structure for table `users` */
+
+DROP TABLE IF EXISTS `users`;
+
+CREATE TABLE `users` (
+  `username` varchar(50) DEFAULT NULL,
+  `password` varchar(500) DEFAULT NULL,
+  `enabled` tinyint(1) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `users` */
+
+insert  into `users`(`username`,`password`,`enabled`) values ('user','password',1);
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
