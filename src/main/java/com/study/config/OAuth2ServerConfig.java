@@ -23,6 +23,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
+import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -80,32 +81,22 @@ public class OAuth2ServerConfig {
 	protected static class AuthorizationServerConfiguration extends AuthorizationServerConfigurerAdapter {
 
 	    @Autowired
-	    AuthenticationManager authenticationManager;
-
-	    @Autowired
 	    ClientDetailsService clientDetailsService;
 
         @Override
         public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
             clients.inMemory().withClient("APP_1")
                     .resourceIds(RESOURCE_ID)
-                    .authorizedGrantTypes("password", "authorization_code", "refresh_token")
+                    .authorizedGrantTypes("authorization_code", "refresh_token")
                     .authorities("client")
                     .scopes("read")
-                    .secret("PWD_1")
-                    .accessTokenValiditySeconds(600);
+                    .secret("PWD_1");
         }
 
         @Override
         public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
             endpoints.tokenStore(tokenStore())
-                    .userApprovalHandler(userApprovalHandler())
-                    .authenticationManager(authenticationManager);
-        }
-
-        @Override
-        public void configure(AuthorizationServerSecurityConfigurer oauthServer) throws Exception {
-            oauthServer.realm(RESOURCE_ID + "/client").allowFormAuthenticationForClients();
+                    .userApprovalHandler(userApprovalHandler());
         }
 
 
