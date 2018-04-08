@@ -43,3 +43,14 @@ GET http://localhost:8080/study
 - grant_type=client_credentials
 
 在 Header 中添加 Authorization， 值为 Basic \[Base64编码((client_id):(client_secret))\]
+
+
+## 刷新 Token
+
+GET http://localhost:8080/oauth/token
+
+参数
+- grant_type=refresh_token
+- refresh_token=(之前获得的refresh_code)
+
+Header 中添加 Authorization， 值为 Basic \[Base64编码((client_id):(client_secret))\]

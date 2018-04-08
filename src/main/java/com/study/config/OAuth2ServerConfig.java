@@ -44,6 +44,9 @@ import org.springframework.security.oauth2.provider.approval.UserApprovalHandler
 import org.springframework.security.oauth2.provider.request.DefaultOAuth2RequestFactory;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.InMemoryTokenStore;
+import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
+
+import javax.sql.DataSource;
 
 @Configuration
 public class OAuth2ServerConfig {
@@ -83,6 +86,9 @@ public class OAuth2ServerConfig {
 	    @Autowired
 	    ClientDetailsService clientDetailsService;
 
+        @Autowired
+        private DataSource dataSource;
+
         @Override
         public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
             clients.inMemory().withClient("APP_1")
@@ -90,7 +96,8 @@ public class OAuth2ServerConfig {
                     .authorizedGrantTypes("authorization_code", "client_credentials", "refresh_token")
                     .authorities("client")
                     .scopes("read")
-                    .secret("PWD_1");
+                    .secret("PWD_1")
+                    .accessTokenValiditySeconds(120);
         }
 
         @Override
@@ -102,7 +109,8 @@ public class OAuth2ServerConfig {
 
         @Bean
         public TokenStore tokenStore() {
-            return new InMemoryTokenStore();
+            JdbcTokenStore jdbcTokenStore = new JdbcTokenStore(dataSource);
+            return jdbcTokenStore;
         }
 
         @Bean
