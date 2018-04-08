@@ -25,6 +25,31 @@ CREATE TABLE `oauth_access_token` (
   PRIMARY KEY (`token_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+/*Data for the table `oauth_access_token` */
+
+/*Table structure for table `oauth_client_details` */
+
+DROP TABLE IF EXISTS `oauth_client_details`;
+
+CREATE TABLE `oauth_client_details` (
+  `client_id` varchar(32) NOT NULL,
+  `client_secret` varchar(32) DEFAULT NULL,
+  `resource_ids` varchar(128) DEFAULT NULL,
+  `scope` varchar(128) DEFAULT NULL,
+  `authorized_grant_types` varchar(128) DEFAULT NULL,
+  `web_server_redirect_uri` varchar(128) DEFAULT NULL,
+  `authorities` varchar(128) DEFAULT NULL,
+  `access_token_validity` int(11) DEFAULT NULL COMMENT 'token过期时间（秒）',
+  `refresh_token_validity` int(11) DEFAULT NULL,
+  `additional_information` varchar(32) DEFAULT NULL,
+  `autoapprove` varchar(32) DEFAULT NULL,
+  PRIMARY KEY (`client_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `oauth_client_details` */
+
+insert  into `oauth_client_details`(`client_id`,`client_secret`,`resource_ids`,`scope`,`authorized_grant_types`,`web_server_redirect_uri`,`authorities`,`access_token_validity`,`refresh_token_validity`,`additional_information`,`autoapprove`) values ('APP_1','PWD_1','study-resource','read','authorization_code,client_credentials,refresh_token',NULL,NULL,120,NULL,NULL,NULL);
+
 /*Table structure for table `oauth_refresh_token` */
 
 DROP TABLE IF EXISTS `oauth_refresh_token`;
@@ -35,6 +60,7 @@ CREATE TABLE `oauth_refresh_token` (
   `authentication` blob
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+/*Data for the table `oauth_refresh_token` */
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

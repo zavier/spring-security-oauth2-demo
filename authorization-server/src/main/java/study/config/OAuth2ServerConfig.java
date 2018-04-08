@@ -25,8 +25,6 @@ import javax.sql.DataSource;
 @Configuration
 public class OAuth2ServerConfig {
 
-	public static final String RESOURCE_ID = "study-resource";
-
 	@Configuration
 	@EnableAuthorizationServer
 	protected static class AuthorizationServerConfiguration extends AuthorizationServerConfigurerAdapter {
@@ -39,12 +37,7 @@ public class OAuth2ServerConfig {
 
 		@Override
 		public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-			clients.inMemory().withClient("APP_1")
-					.resourceIds(RESOURCE_ID)
-					.authorizedGrantTypes("authorization_code", "client_credentials", "refresh_token")
-					.authorities("client")
-					.scopes("read")
-					.secret("PWD_1");
+			clients.jdbc(dataSource);
 		}
 
 		@Override
