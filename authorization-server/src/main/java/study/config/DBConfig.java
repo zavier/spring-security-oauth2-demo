@@ -1,4 +1,4 @@
-package com.study.config;
+package study.config;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import org.springframework.beans.factory.annotation.Autowired;

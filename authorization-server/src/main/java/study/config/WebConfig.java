@@ -1,4 +1,4 @@
-package com.study.config;
+package study.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -11,7 +11,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan("com.study")
+@ComponentScan("study")
 public class WebConfig extends WebMvcConfigurerAdapter{
     /**
      * 配置视图解析器

@@ -1,4 +1,4 @@
-package com.study.config;
+package study.config;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
