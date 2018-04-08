@@ -87,7 +87,7 @@ public class OAuth2ServerConfig {
         public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
             clients.inMemory().withClient("APP_1")
                     .resourceIds(RESOURCE_ID)
-                    .authorizedGrantTypes("authorization_code", "refresh_token")
+                    .authorizedGrantTypes("authorization_code", "client_credentials", "refresh_token")
                     .authorities("client")
                     .scopes("read")
                     .secret("PWD_1");

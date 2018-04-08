@@ -1,4 +1,4 @@
-# 使用认证码认证的服务端实现
+## 使用认证码认证方式认证
 
 一、GET http://localhost:8080/oauth/authorize
 
@@ -24,7 +24,7 @@ POST http://localhost:8080/oauth/token
 - code=8WLBnt（上一步获得的 code）
 - redirect_uri=http%3a%2f%2flocalhost%3a8080%2fhello
 
-并在 Header 中添加 : Authorization , 值为 Basic Base64.encode(CLIENT_ID + ":" + CLIENT_SECRET)
+并在 Header 中添加 : Authorization , 值为 Basic Base64编码(CLIENT_ID + ":" + CLIENT_SECRET)
 
 此处可直接写 Authorization 值为 Basic QVBQXzE6UFdEXzE=
 
@@ -32,4 +32,14 @@ POST http://localhost:8080/oauth/token
 
 GET http://localhost:8080/study
 
-在 Header 中添加 Token, 格式为 ： Authorization 值为 ：Bearer \[TOKEN\] 
+在 Header 中添加 Token, 格式为 ： Authorization 值为 ：Bearer \[TOKEN\]
+
+
+## 使用客户端认证方式认证 
+
+一、 GET http://localhost:8080/oauth/token
+
+参数
+- grant_type=client_credentials
+
+在 Header 中添加 Authorization， 值为 Basic \[Base64编码((client_id):(client_secret))\]
