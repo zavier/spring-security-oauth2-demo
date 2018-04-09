@@ -24,7 +24,7 @@ POST http://localhost:8080/oauth/token
 - code=8WLBnt（上一步获得的 code）
 - redirect_uri=http%3a%2f%2flocalhost%3a8080%2fhello
 
-并在 Header 中添加 : Authorization , 值为 Basic Base64编码(CLIENT_ID + ":" + CLIENT_SECRET)
+并在 Header 中添加 : Authorization , 值为  "Basic \[Base64编码((client_id):(client_secret))\]"
 
 此处可直接写 Authorization 值为 Basic QVBQXzE6UFdEXzE=
 
@@ -32,7 +32,7 @@ POST http://localhost:8080/oauth/token
 
 GET http://localhost:8080/study
 
-在 Header 中添加 Token, 格式为 ： Authorization 值为 ：Bearer \[TOKEN\]
+在 Header 中添加 Token, 格式为 ： Authorization 值为 ："Bearer \[TOKEN\]"
 
 
 ## 使用客户端认证方式认证 
@@ -42,7 +42,21 @@ GET http://localhost:8080/study
 参数
 - grant_type=client_credentials
 
-在 Header 中添加 Authorization， 值为 Basic \[Base64编码((client_id):(client_secret))\]
+在 Header 中添加 Authorization， 值为 "Basic \[Base64编码((client_id):(client_secret))\]"
+
+
+## 使用密码认证方式认证
+
+POST http://localhost:8080/oauth/token
+
+参数
+
+- username=user
+- password=password
+- grant_type=password
+- scope=read
+
+Header中 Authorization = "Basic \[Base64编码((client_id):(client_secret))\]"
 
 
 ## 刷新 Token
@@ -53,4 +67,4 @@ GET http://localhost:8080/oauth/token
 - grant_type=refresh_token
 - refresh_token=(之前获得的refresh_code)
 
-Header 中添加 Authorization， 值为 Basic \[Base64编码((client_id):(client_secret))\]
+Header 中添加 Authorization， 值为 "Basic \[Base64编码((client_id):(client_secret))\]"

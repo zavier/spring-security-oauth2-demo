@@ -3,6 +3,7 @@ package study.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
@@ -35,6 +36,9 @@ public class OAuth2ServerConfig {
         @Autowired
         private DataSource dataSource;
 
+        @Autowired
+        private AuthenticationManager authenticationManager;
+
         @Override
         public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
             clients.jdbc(dataSource);
@@ -43,7 +47,8 @@ public class OAuth2ServerConfig {
         @Override
         public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
             endpoints.tokenStore(tokenStore())
-                    .userApprovalHandler(userApprovalHandler());
+                    .userApprovalHandler(userApprovalHandler())
+                    .authenticationManager(authenticationManager);
         }
 
 
