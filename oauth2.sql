@@ -22,7 +22,7 @@ CREATE TABLE `authorities` (
 
 /*Data for the table `authorities` */
 
-insert  into `authorities`(`username`,`authority`) values ('user','USER');
+insert  into `authorities`(`username`,`authority`) values ('user','ROLE_USER');
 
 /*Table structure for table `oauth_access_token` */
 
@@ -62,7 +62,7 @@ CREATE TABLE `oauth_client_details` (
 
 /*Data for the table `oauth_client_details` */
 
-insert  into `oauth_client_details`(`client_id`,`client_secret`,`resource_ids`,`scope`,`authorized_grant_types`,`web_server_redirect_uri`,`authorities`,`access_token_validity`,`refresh_token_validity`,`additional_information`,`autoapprove`) values ('APP_1','PWD_1','study-resource','read','authorization_code,client_credentials,refresh_token',NULL,NULL,120,NULL,NULL,NULL);
+insert  into `oauth_client_details`(`client_id`,`client_secret`,`resource_ids`,`scope`,`authorized_grant_types`,`web_server_redirect_uri`,`authorities`,`access_token_validity`,`refresh_token_validity`,`additional_information`,`autoapprove`) values ('APP_1','PWD_1','study-resource','read','authorization_code,client_credentials,password,refresh_token',NULL,NULL,120,NULL,NULL,NULL);
 
 /*Table structure for table `oauth_refresh_token` */
 
